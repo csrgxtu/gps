@@ -1,0 +1,35 @@
+.div_center {
+  width:490px;
+  height:390px;
+  padding:5px;
+  position:fixed;
+  left:50%;
+  top:50%;
+  margin-left:-250px;
+  margin-top:-200px;
+}
+/* alternatively */
+.div_center {
+  width:490px;
+  height:auto;
+  padding:5px;
+  position:fixed;
+  left:50%;
+  top:35%;
+  margin-left:-250px;
+}
+/* or if you have a better idea of the height,
+assuming the elements height will be around 500px,
+you want to use a higher value */
+
+.div_center {
+  width:490px;
+  height:auto;
+  padding:5px;
+  position:fixed;
+  left:50%;
+  top:5%;
+  margin-left:-250px;
+  margin-top:-250px;
+}
+

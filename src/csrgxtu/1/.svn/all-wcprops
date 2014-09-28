@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 22
+/csrgxtu2/!svn/ver/1/1
+END
+config.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/csrgxtu2/!svn/ver/30/1/config.yaml
+END
+app.py
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/csrgxtu2/!svn/ver/31/1/app.py
+END
+checkip.py
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/csrgxtu2/!svn/ver/31/1/checkip.py
+END
+Download.py
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/csrgxtu2/!svn/ver/8/1/Download.py
+END
+index.wsgi
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/csrgxtu2/!svn/ver/1/1/index.wsgi
+END
+availableip.py
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/csrgxtu2/!svn/ver/21/1/availableip.py
+END
+Download.pyc
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/csrgxtu2/!svn/ver/31/1/Download.pyc
+END
+TopIp.py
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/csrgxtu2/!svn/ver/31/1/TopIp.py
+END

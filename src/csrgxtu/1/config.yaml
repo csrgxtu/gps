@@ -1,0 +1,10 @@
+libraries:
+- name: 'lxml'
+  version: '2.3.4'
+
+name: crontest
+version: 1
+cron:
+- description: cron_test
+  url: /cron
+  schedule: "*/10 * * * *"
