@@ -7,9 +7,19 @@ from Download import *
 from checkip import *
 
 app = Flask(__name__)
-app.debug = True
+#app.debug = True
 
-API_HOST = '64.15.119.167'
+# loadBestIP
+# load the best IP host from ./static/top.txt
+#
+# @param filePath
+# @return IP
+def loadBestIP(filePath):
+  with open(filePath, "r") as myFile:
+    return myFile.readline().rstrip("\n")
+
+#API_HOST = '64.15.119.167'
+API_HOST = loadBestIP('./static/top.txt')
 
 @app.route("/")
 @app.route("/index")
