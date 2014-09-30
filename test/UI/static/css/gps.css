@@ -1,0 +1,19 @@
+// Classes
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Usage as mixins
+.element {
+  .center-block();
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  padding-top: 50%;
+  display: flex;
+  align-items: center;
+}

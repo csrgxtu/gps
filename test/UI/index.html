@@ -9,7 +9,10 @@
     <link rel="icon" href="./static/favicon.ico">
 
     <title>Google Search</title>
-
+    
+    <!-- GPS CSS -->
+    <link href="./static/css/gps.css" rel="stylesheet">
+    
     <!-- Bootstrap core CSS -->
     <link href="./static/css/bootstrap.min.css" rel="stylesheet">
 
@@ -68,12 +71,33 @@
 
 
     <!-- Begin page content -->
-    <div class="container">
-      <div class="page-header">
+    <div class="container" style="margin-top: 10%;">
+      <!--<div class="page-header">
         <h1>Sticky footer with fixed navbar</h1>
+      </div>-->
+      <!--<p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>-->
+      <!--<p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>-->
+      
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <center>
+            <img src="./static/images/logo11w.png" class="img-responsive" alt="Responsive image" style="no-repeat;background-size:269px 95px;height:95px;width:269px">
+          </center>
+          <br/>
+          <form role="form" method="GET" action="/search">
+            <fieldset>
+              <div class="form-group">
+                <input type="text" id="focusedInput" class="form-control" name="q">
+              </div>
+              <center>
+              <button type="submit" class="btn btn-success">Google Search</button>
+              &nbsp&nbsp
+              <button type="button" class="btn btn-primary">I'm Feeling Lucky</button>
+              </center>
+            </fieldset>
+          </form>
+        </div>
       </div>
-      <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>
-      <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
     </div>
 
     <!--<div class="footer">
