@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./static/favicon.ico">
+
+    <title>Google Search</title>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./static/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./static/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pure-min.css">
+    <style>
+      .Result-Box {
+        margin-left: 9%;
+        /*margin-left: 50px;*/
+        margin-top: 20px;
+        width: 51.8%;
+      }
+      
+      .Ul-List {
+        list-style-type: none;
+        margin-top: 10px;
+        margin-left: -40px;
+      }
+      
+      .Pagination {
+        margin-top: 50px;
+        margin-left: 2%;
+      }
+      
+      .Result-Item {
+        list-style-type: none;
+        margin-top: 10px;
+        /*margin-left: -40px;*/
+        margin-left: -5%;
+        /*margin-right: 20px;*/
+      }
+      
+      .Result-Item-Title {
+        font-size: 19px;
+        font-style: bold;
+        max-width: 580px;
+        min-width: 420px;
+        max-height: 22px;
+        overflow: hidden;
+      }
+
+      .Result-Item-Short-Link {
+        font-size: 15px;
+        color: green;
+        margin-bottom: 5px;
+      }
+
+      .Result-Item-Abstract {
+        color: #606060;
+        max-width: 580px;
+        min-width: 420px;
+        max-height: 59px;
+        overflow: hidden;
+      }
+                
+      a {
+        outline: 0;
+        text-decoration: none;
+        color: blue;
+      }
+      
+      a:hover {
+        text-decoration: underline;
+      }
+      
+      a:visited {
+        color: #800080;
+      }
+      
+      a:active {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Top Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://github.com/csrgxtu/gps">GPS</a>
+        </div>
+        
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/search">Search</a></li>
+            <li><a href="http://csrgxtu.blog.com">Blog</a></li>
+            <li><a href="http://www.ubuntu.com/">Linux</a></li>
+            <li><a href="#news">News</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#gmail">Gmail</a></li>
+                <li><a href="#translate">Translate</a></li>
+                <li><a href="#drive">Drive</a></li>
+                <li><a href="#calander">Calander</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#login">Login</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+<!-- search box -->
+    <div style="margin-top: 35px;">
+      <a href="#"><img src="./static/images/logo11w.png" width="108" height="38" style="margin-left: 10px; margin-right: 8px; margin-top: 3px; float: left;"></a>
+      <form class="pure-form" style="margin-left: 9%;" action="/search" method="GET">
+        <fieldset>
+            <input class="pure-input-1-2" type="text" name="q" autofocus>
+            <button type="submit" class="pure-button pure-button-primary">Search</button>
+        </fieldset>
+      </form>
+    </div>
+
+    <hr style="height: 0.5px; min-width:480px;">
+    
+    <!-- result box -->
+    <div class="Result-Box">
+      <ul class="Ul-List">
+        <li>
+          <div>
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.ubuntu.com/">Ubuntu:The world's most popular free OS</a></li>
+              <li class="Result-Item-Short-Link">www.ubuntu.com/</li>
+              <li class="Result-Item-Abstract">Fast, secure and stylishly simple, the Ubuntu operating system is used by 20 million people everyday. You can used it freely without any pays.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://ubuntugnome.org">Ubuntu Gnome</a></li>
+              <li class="Result-Item-Short-Link">ubuntugnome.org/</li>
+              <li class="Result-Item-Abstract">Official flavour of Ubuntu, featuring the GNOME desktop evironment by default. It is a Community Project and all the members of this project are working on voluntary basis. We do what we do.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.debian.org/">Debian -- The Universal Operating System</a></li>
+              <li class="Result-Item-Short-Link">www.debian.org/</li>
+              <li class="Result-Item-Abstract">Debian provides more than a pure OS: it comes with over 37500 packages, precompiled software bundled up in a nice format for easy installation on your ...</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://fedoraproject.org/">Fedora Project Homepage</a></li>
+              <li class="Result-Item-Short-Link">fedoraproject.org/</li>
+              <li class="Result-Item-Abstract">Free your desktop with Fedora. Fedora is a fast, stable, and powerful operating system for everyday use built by a worldwide community of friends. It's completely free to use, study, and share.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.videolan.org/vlc/index.html">VideoLAN - Official page for VLC media player, the Open ...</a></li>
+              <li class="Result-Item-Short-Link">www.videolan.org/vlc/index.html</li>
+              <li class="Result-Item-Abstract">VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVD, Audio CD, VCD, and various streaming protocols.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.gnome.org/">GNOME</a></li>
+              <li class="Result-Item-Short-Link">www.gnome.org/</li>
+              <li class="Result-Item-Abstract">GNOME 3 is an easy and elegant way to use your computer. It is designed to put you in control and bring freedom to everybody. GNOME 3 is developed by the GNOME community, a diverse, international group of contributors that is supported by an independent, non-profit foundation.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="https://unity3d.com/">Unity - Game Engine</a></li>
+              <li class="Result-Item-Short-Link">https://unity3d.com/</li>
+              <li class="Result-Item-Abstract">Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations ...</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="https://unity.ubuntu.com/">Unity | Unity</a></li>
+              <li class="Result-Item-Short-Link">https://unity.ubuntu.com/</li>
+              <li class="Result-Item-Abstract">Founded in 2010, the Unity project started by Mark Shuttleworth and Canonical has gone on to deliver a consistent user experience for desktop and netbook users alike. Putting great design at the heart of the project, Unity and its technologies such as Application indicators, System indicators, and Notify OSD, have strived to solve common problems in the Free Software desktop while optimizing the experience for touch, consistency and collaboration.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://ellislab.com/codeigniter">CodeIgniter / EllisLab</a></li>
+              <li class="Result-Item-Short-Link">http://ellislab.com/codeigniter/</li>
+              <li class="Result-Item-Abstract">CodeIgniter is a powerful PHP framework with a very small footprint, built for PHP coders who need a simple and elegant toolkit to create full-featured web applications. If you're a developer who lives in the real world of shared hosting accounts and clients with deadlines, and if you're tired of ponderously large and thoroughly undocumented frameworks, then CodeIgniter might be a good fit.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="https://github.com/csrgxtu/">csrgxtu (Archer Reilly) Â· GitHub</a></li>
+              <li class="Result-Item-Short-Link">https://github.com/csrgxtu/</li>
+              <li class="Result-Item-Abstract">csrgxtu has 3 repositories written in Shell, CSS, and Java. Follow their code on GitHub.</li>
+            </ul>
+            </div>
+              <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+          </div>
+          
+
+
+    <!-- Bottom Footer -->
+    <div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="inactive"><a href="#about">About</a></li>
+            <li><a href="#terms">Privacy&Terms</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./static/js/jquery-1.11.1.min.js"></script>
+    <script src="./static/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./static/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
