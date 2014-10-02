@@ -1,2 +1,2 @@
-python checkip.py
-python TopIP.py
+python /var/www/app/src/checkip.py
+python /var/www/app/src/TopIp.py
