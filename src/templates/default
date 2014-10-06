@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+
+  WSGIDaemonProcess app user=www-data group=www-data threads=5
+  WSGIScriptAlias / /home/archer/Documents/gps/src/app.wsgi
+
+	DocumentRoot /home/archer/Documents/gps/src
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+	<Directory /home/archer/Documents/gps/src/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

@@ -19,7 +19,7 @@ def loadBestIP(filePath):
     return myFile.readline().rstrip("\n")
 
 #API_HOST = '64.15.119.167'
-API_HOST = loadBestIP('./static/top.txt')
+API_HOST = loadBestIP('/home/archer/Documents/gps/src/static/top.txt')
 
 @app.route("/")
 @app.route("/index")
