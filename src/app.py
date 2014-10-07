@@ -29,6 +29,9 @@ def index():
 @app.route("/search")
 def search():
   q = quote(unicode(request.args.get('q', '')).encode('utf8'))
+  print "Debug: ", q
+  if q == "":
+    return redirect("/")
   start = request.args.get('start', '')
   log()
   return replacer(queryGoogle(q, start))
