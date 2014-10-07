@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+# coding=utf8
+# Author: Archer Reilly
+# File: app.py
+# Date: 07/Dec/2014
+# Desc: main flask file
+#
+# Produced By CSRGXTU
+import sys
+sys.path.insert(0, './lib')
+
 from flask import Flask, render_template
 from flask import request
 from flask import redirect
@@ -5,6 +16,7 @@ from urllib import quote, unquote
 from datetime import datetime
 from Download import *
 from checkip import *
+import config
 
 app = Flask(__name__)
 #app.debug = True
@@ -19,7 +31,7 @@ def loadBestIP(filePath):
     return myFile.readline().rstrip("\n")
 
 #API_HOST = '64.15.119.167'
-API_HOST = loadBestIP('/home/archer/Documents/gps/src/static/top.txt')
+API_HOST = loadBestIP(config.TOP_IP_FILE)
 
 @app.route("/")
 @app.route("/index")
@@ -83,7 +95,7 @@ def log():
   #keyWord = str(quote(unicode(request.args.get('q', '')).encode('utf8')))
   keyWord = unicode(request.args.get('q', '')).encode('utf8')
   csvStr = timeStamp + "," + clientIP + "," + userAgent + "," + keyWord + "\n"
-  with open("./static/log.txt", "a") as myFile:
+  with open(config.LOG_FILE, "a") as myFile:
     myFile.write(csvStr)
 
 
