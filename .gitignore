@@ -1,0 +1,9 @@
+# some plain text file #
+########################
+*.txt
+*.tar.gz
+*.tar
+*.bz2
+*.zip
+*.rar
+*.log
