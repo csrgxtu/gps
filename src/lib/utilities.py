@@ -29,7 +29,7 @@ def queryGoogle(q, start):
   GOOGLE_API = 'http://' + API_HOST + '/search?q='
   dobj = Download(GOOGLE_API + q + '&start=' + start)
   if (dobj.doRequest()):
-   return "Cant get content"
+   return None
   else:
     return dobj.getSOURCE()
 

@@ -7,7 +7,7 @@
 #
 # Produced By CSRGXTU
 import sys
-sys.path.insert(0, './lib')
+sys.path.insert(0, '/home/archer/Documents/gps/src/lib')
 
 from flask import Flask, render_template
 from flask import request
@@ -17,7 +17,6 @@ import config
 import utilities
 
 app = Flask(__name__)
-#app.debug = True
 
 @app.route("/")
 @app.route("/index")
@@ -31,7 +30,11 @@ def search():
     return redirect("/")
   start = request.args.get('start', '')
   utilities.log(str(request.remote_addr), str(request.headers.get('User-Agent')), request.args.get('q', ''))
-  return utilities.replacer(utilities.queryGoogle(q, start))
+  html = utilities.queryGoogle(q, start)
+  if html == None:
+    return render_template('error.html')
+  else:
+    return utilities.replacer(html)
 
 @app.route("/url")
 def url():
