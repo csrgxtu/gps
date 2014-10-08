@@ -57,6 +57,9 @@ def replacer(html):
 
   # replace /xjs/_
   html = html.replace('/xjs/', 'http://' + API_HOST + '/xjs/')
+  
+  # replace all google.com to csrgxtu.com
+  html = html.replace('google.com', 'csrgxtu.com')
 
   return html
 
