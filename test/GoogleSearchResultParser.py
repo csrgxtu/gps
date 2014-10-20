@@ -6,6 +6,12 @@
 # Desc: this class is used to parse the Google search result,
 # get the json representation of the search result.
 # {
+#   'relatedKeyWords': {
+#     0: 'python beautiful',
+#     1: 'beautiful soup tut',
+#     ...
+#   },
+#   'resultStats': 'About 256,000 results',
 #   'results': [
 #     {
 #       'title': 'Beautiful Soup: We called him ..',
@@ -57,6 +63,7 @@ class GoogleSearchResultParser(object):
     return item.find("h3", class_="r").find("a")["href"]
 
   def getEscapedUrl(self, item):
+    print item
     return item.find("div", class_="s").find("cite").get_text()
 
   def getContent(self, item):
@@ -77,12 +84,17 @@ class GoogleSearchResultParser(object):
   def getJson(self):
     tmpLst = []
     for item in self.resultSets:
-      title = unicode(self.getTitle(item)).encode('utf8')
-      unescapedUrl = unicode(self.getUnescapedUrl(item)).encode('utf8')
-      escapedUrl = unicode(self.getEscapedUrl(item)).encode('utf8')
-      content = unicode(self.getContent(item)).encode('utf8')
-      tmpDict = {'title': title, 'unescapedUrl': unescapedUrl, 'escapedUrl': escapedUrl, 'content': content}
-      tmpLst.append(tmpDict)
+      # some search result may contain video and image results, so
+      # the upper parser wont work on it
+      try:
+        title = unicode(self.getTitle(item)).encode('utf8')
+        unescapedUrl = unicode(self.getUnescapedUrl(item)).encode('utf8')
+        escapedUrl = unicode(self.getEscapedUrl(item)).encode('utf8')
+        content = unicode(self.getContent(item)).encode('utf8')
+        tmpDict = {'title': title, 'unescapedUrl': unescapedUrl, 'escapedUrl': escapedUrl, 'content': content}
+        tmpLst.append(tmpDict)
+      except AttributeError:
+        continue
     self.jsonData['results'] = tmpLst
     self.jsonData['resultStats'] = self.getResultStats()
     self.jsonData['relatedKeyWords'] = self.getRelatedKeyWords()

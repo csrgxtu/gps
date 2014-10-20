@@ -6,6 +6,12 @@
 # Desc: this class is used to parse the Google search result,
 # get the json representation of the search result.
 # {
+#   'relatedKeyWords': {
+#     0: 'python beautiful',
+#     1: 'beautiful soup tut',
+#     ...
+#   },
+#   'resultStats': '256000',
 #   'results': [
 #     {
 #       'title': 'Beautiful Soup: We called him ..',
@@ -25,7 +31,7 @@
 #
 # Produced By CSRGXTU
 from bs4 import BeautifulSoup
-#from json import dumps
+from json import dumps
 
 class GoogleSearchResultParser(object):
   # hold the original html source code
@@ -63,26 +69,35 @@ class GoogleSearchResultParser(object):
     return item.find("div", class_="s").find("span", class_="st").get_text()
   
   def getResultStats(self):
-    return unicode(self.soup.select("#resultStats")[0].get_text()).encode('utf8')
+    statsStr = self.soup.select("#resultStats")[0].get_text()
+    start = statsStr.find("out")
+    end = statsStr.find("res")
+    return statsStr[start:end][4:-1].replace(",", "")
+
 
   def getRelatedKeyWords(self):
     tmpDict = {}
     tags = self.soup.find_all("p", class_="_Bmc")
     i = 0
     for item in tags:
-      tmpDict[i] = unicode(item.find("a").get_text()).encode('utf8')
+      tmpDict[i] = item.find("a").get_text()
       i = i + 1
     return tmpDict
 
   def getJson(self):
     tmpLst = []
     for item in self.resultSets:
-      title = unicode(self.getTitle(item)).encode('utf8')
-      unescapedUrl = unicode(self.getUnescapedUrl(item)).encode('utf8')
-      escapedUrl = unicode(self.getEscapedUrl(item)).encode('utf8')
-      content = unicode(self.getContent(item)).encode('utf8')
-      tmpDict = {'title': title, 'unescapedUrl': unescapedUrl, 'escapedUrl': escapedUrl, 'content': content}
-      tmpLst.append(tmpDict)
+      # some search result may contain video and image results, so
+      # the upper parser wont work on it
+      try:
+        title = self.getTitle(item)
+        unescapedUrl = self.getUnescapedUrl(item)
+        escapedUrl = self.getEscapedUrl(item)
+        content = self.getContent(item)
+        tmpDict = {'title': title, 'unescapedUrl': unescapedUrl, 'escapedUrl': escapedUrl, 'content': content}
+        tmpLst.append(tmpDict)
+      except AttributeError:
+        continue
     self.jsonData['results'] = tmpLst
     self.jsonData['resultStats'] = self.getResultStats()
     self.jsonData['relatedKeyWords'] = self.getRelatedKeyWords()

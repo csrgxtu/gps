@@ -8,8 +8,14 @@
     <meta name="author" content="">
     <link rel="icon" href="./static/favicon.ico">
 
-    <title>Google Search</title>
-    
+    <!--<title>Google Search</title>-->
+
+    {% if jsonData.q %}
+      <title>{{ jsonData.q }}</title>
+    {% else %}
+      <title>Google Search Default Title</title>
+    {% endif %}
+        
     <!-- Bootstrap core CSS -->
     <link href="./static/css/bootstrap.min.css" rel="stylesheet">
 
@@ -64,12 +70,14 @@
 
       .Result-Item-Short-Link {
         font-size: 15px;
-        color: green;
+        /*color: green;*/
+        color: #006621;
         margin-bottom: 5px;
       }
 
       .Result-Item-Abstract {
-        color: #606060;
+        /*color: #606060;*/
+        color: #444;
         max-width: 580px;
         min-width: 420px;
         max-height: 59px;
@@ -80,21 +88,24 @@
         /*margin-left: 9.1%;*/
         width: 51.8%;
         color: #606060;
-        font-size: 12px;
+        font-size: 13px;
       }
 
       a {
         outline: 0;
         text-decoration: none;
-        color: blue;
+        /*color: blue;*/
+        color: #1a0dab;
+        cursor: pointer;
       }
       
       a:hover {
-        text-decoration: underline;
+        text-decoration: none;
       }
       
       a:visited {
-        color: #800080;
+        /*color: #800080;*/
+        color: #61C;
       }
       
       a:active {
@@ -115,7 +126,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="https://github.com/csrgxtu/gps">GPS</a>
+          <a class="navbar-brand" href="/">GPS</a>
         </div>
         
         <div class="collapse navbar-collapse">
@@ -143,7 +154,7 @@
 
 <!-- search box -->
     <div style="margin-top: 35px;">
-      <a href="#"><img src="./static/images/logo11w.png" width="108" height="38" style="margin-left: 10px; margin-right: 8px; margin-top: 3px; float: left;"></a>
+      <a href="/"><img src="./static/images/logo11w.png" width="108" height="38" style="margin-left: 10px; margin-right: 8px; margin-top: 3px; float: left;"></a>
       <form class="pure-form" style="margin-left: 9%;" action="/search" method="GET">
         <fieldset>
             <input class="pure-input-1-2" type="text" name="q" autofocus>
@@ -158,10 +169,23 @@
     <!-- result stats -->
     <!-- result box -->
     <div class="Result-Box">
-      <span class="Result-Item-Stats">About 13,300,000 results</span>
+      {% if jsonData.start|int > 10 %}
+        <span class="Result-Item-Stats">Page {{ jsonData.start|int / 10 | int}} about {{ jsonData.resultStats }} results</span>
+      {% else %}
+        <span class="Result-Item-Stats">About  {{ jsonData.resultStats}}  results</span>
+      {% endif %}
       <ul class="Ul-List">
         <li>
           <div>
+            {% for item in jsonData.results %}
+              <ul class="Result-Item">
+                <li class="Result-Item-Title"><a href="{{ item.unescapedUrl }}" target="_blank">{{ item.title }}</a></li>
+                <li class="Result-Item-Short-Link">{{ item.escapedUrl }}</li>
+                <li class="Result-Item-Abstract">{{ item.content }}</li>
+              </ul>
+            {% endfor %}
+
+            <!--
             <ul class="Result-Item">
               <li class="Result-Item-Title"><a href="http://www.ubuntu.com/">Ubuntu:The world's most popular free OS</a></li>
               <li class="Result-Item-Short-Link">www.ubuntu.com/</li>
@@ -221,7 +245,26 @@
               <li class="Result-Item-Short-Link">https://github.com/csrgxtu/</li>
               <li class="Result-Item-Abstract">csrgxtu has 3 repositories written in Shell, CSS, and Java. Follow their code on GitHub.</li>
             </ul>
+          -->
 
+            {% if jsonData.relatedKeyWords %}
+              <ul class="Result-Item">
+                <br/>
+                <span> Search Related: </span>
+                <table style="width:100%">
+                  {% for item in jsonData.relatedKeyWords %}
+                    {% if loop.index is even %}
+                      <td><a href="/search?q={{ jsonData.relatedKeyWords[loop.index]}}">{{ jsonData.relatedKeyWords[loop.index]}}</a></td>
+                      </tr>
+                    {% else %}
+                      <tr>
+                      <td><a href="/search?q={{ jsonData.relatedKeyWords[loop.index]}}">{{ jsonData.relatedKeyWords[loop.index]}}</a></td>
+                    {% endif %}
+                  {% endfor %}
+                </table>
+              </ul>
+            {% endif %}
+            <!--
             <ul class="Result-Item">
               <br/>
               <span> Search related </span>
@@ -236,12 +279,26 @@
                 </tr>
               </table>
             </ul>
+          -->
 
+            {% set pages = 100/10|int %}
+            <ul class="Result-Item">
+              <ul class="pagination">
+              {% for pageIndex in range(10) %}
+                {% if pageIndex == jsonData.start|int/10 %}
+                  <li class="active"><a href="/search?q={{jsonData.q}}&start={{pageIndex * 10}}">{{pageIndex + 1}} <span class="sr-only">(current)</span></a></li>
+                {% else %}
+                  <li class="disable"><a href="/search?q={{jsonData.q}}&start={{pageIndex * 10}}">{{pageIndex + 1}}</a></li>
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </ul>
+            <!--
             <ul class="Result-Item">
               <ul class="pagination">
                 <li><a href="#">&laquo;</a></li>
                 <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
+                <li><a href="/search?q={{jsonData.q}}">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
@@ -253,6 +310,7 @@
                 <li><a href="#">&raquo;</a></li>
               </ul>
             </ul>
+          -->
             </div>
           </div>
           
