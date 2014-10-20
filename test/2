@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+# coding = utf8
+# Author: Archer Reilly
+# Date: 19/Oct/2014
+# File: GoogleSearchResultParser.py
+# Desc: this class is used to parse the Google search result,
+# get the json representation of the search result.
+# {
+#   'results': [
+#     {
+#       'title': 'Beautiful Soup: We called him ..',
+#       'unescapedUrl': '',
+#       'escapedUrl': '',
+#       'content': ''
+#     },
+#     {
+#       'title': 'Beautiful Soup: We called him ..',
+#       'unescapedUrl': '',
+#       'escapedUrl': '',
+#       'content': ''
+#     },
+#     ...
+#   ]
+# }
+#
+# Produced By CSRGXTU
+from bs4 import BeautifulSoup
+from json import dumps
+
+class GoogleSearchResultParser(object):
+  # hold the original html source code
+  html = None
+
+  # soup object
+  soup = None
+
+  # result sets
+  resultSets = None
+
+  # json data
+  jsonData = None
+
+  def __init__(self, html):
+    self.html = html
+    self.soup = BeautifulSoup(self.html)
+
+  def getResultSets(self):
+    self.resultSets = self.soup.find_all("li", class_="g")
+
+  def getTitle(self, item):
+    return item.find("h3", class_="r").find("a").get_text()
+
+  def getUnescapedUrl(self, item):
+    return item.find("h3", class_="r").find("a")["href"]
+
+  def getEscapedUrl(self, item):
+    return item.find("div", class_="s").find("cite").get_text()
+
+  def getContent(self):
+    return item.find("div", class_="s").find("span", class_="st").get_text()
+
+  def getJson(self):
+    pass
