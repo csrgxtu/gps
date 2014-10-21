@@ -165,7 +165,6 @@ ip_str_list = '''
 94.40.70.0-63
 '''
 
-
 #最大IP延时，单位毫秒
 g_maxhandletimeout = 1800
 #最大可用IP数量
