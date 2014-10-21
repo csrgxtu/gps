@@ -9,6 +9,7 @@
 import config
 from Download import *
 from datetime import datetime
+from random import choice
 
 # loadBestIP
 # load the best IP host from ./static/top.txt
@@ -19,6 +20,20 @@ def loadBestIP(filePath):
   with open(filePath, "r") as myFile:
     return myFile.readline().rstrip("\n")
 
+# loadBestNIP
+# load the best N IP host from top.txt
+#
+# @param filePath
+# @param n
+# @return IPS
+def loadBestNIP(filePath, n):
+  IPS = []
+  with open(filePath, "r") as myFile:
+    for i in range(n):
+      IPS.append(myFile.readline().rstrip("\n"))
+  
+  return IPS
+
 # queryGoogle
 # use the IP query the Google
 #
@@ -26,6 +41,8 @@ def loadBestIP(filePath):
 # @param start
 # @return source code of the query or string
 def queryGoogle(q, start):
+  API_HOST = choice(loadBestNIP(config.TOP_IP_FILE, 5))
+  print "Debug: " + API_HOST
   GOOGLE_API = 'http://' + API_HOST + '/search?q='
   dobj = Download(GOOGLE_API + q + '&start=' + start)
   if (dobj.doRequest()):
@@ -79,4 +96,4 @@ def log(clientIP, userAgent, keyWord):
   with open(config.LOG_FILE, "a") as myFile:
     myFile.write(csvStr)
 
-API_HOST = loadBestIP(config.TOP_IP_FILE)
+#API_HOST = loadBestIP(config.TOP_IP_FILE)
