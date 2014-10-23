@@ -20,11 +20,15 @@ from GoogleSearchResultParser import GoogleSearchResultParser
 app = Flask(__name__)
 app.debug = True
 
+# / or /index
+# the home page of the gps search
 @app.route("/")
 @app.route("/index")
 def index():
   return render_template('index.html')
 
+# /search
+# accept the keyword and search and return the result
 @app.route("/search")
 def search():
   q = quote(unicode(request.args.get('q', '')).encode('utf8'))
@@ -35,30 +39,37 @@ def search():
     pass
   else:
     start = str(0)
-  print "Debug: " + start
   utilities.log(str(request.remote_addr), str(request.headers.get('User-Agent')), request.args.get('q', ''))
   html = utilities.queryGoogle(q, start)
   if html == None:
     return render_template('error.html')
   else:
-    #return utilities.replacer(html)
-    """
     g = GoogleSearchResultParser(html)
-    jsonData = g.getJson()
-    print "what is going on"
-    print jsonData
-    """
-    g = GoogleSearchResultParser(html)
-    # print g.getJson()
     jsonData = g.getJson()
     jsonData['q'] = request.args.get('q', '')
     jsonData['start'] = start
     return render_template('result.html', jsonData=jsonData)
 
+# /url
+# used process the google indexed url, actually, it wont need
+# but I cant remove the index encoded characters from Google
+# indexed url
 @app.route("/url")
 def url():
   q = quote(unicode(request.args.get('q', '')).encode('utf8'))
   return redirect(unquote(q), 302)
+
+# proxy
+# when encoutered this kind of url, use goagent get the request
+# content
+@app.route("/proxy")
+def proxy():
+  q = unicode(request.args.get('q', '')).encode('utf8')
+  content = utilities.proxy(q)
+  if content == None:
+    return render_template('error.html')
+  else:
+    return content
 
 @app.errorhandler(404)
 def notFound(error):

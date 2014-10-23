@@ -30,6 +30,11 @@ class Download(object):
   
   def doRequest(self):
     try:
+      opener = urllib2.build_opener(
+        urllib2.HTTPHandler(),
+        urllib2.HTTPSHandler(),
+        urllib2.ProxyHandler({'https': 'http://127.0.0.1:8087'}))
+      urllib2.install_opener(opener)
       req = urllib2.Request(self.getURL(), headers = self.REQ_HEAD)
       handler = urllib2.urlopen(url = req, timeout = self.getTIMEOUT())
       #handler = urllib2.urlopen(self.getURL(), timeout = self.getTIMEOUT())

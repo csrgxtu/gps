@@ -227,3 +227,6 @@
 2014-10-21 03:15:27.868266,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0,damn
 2014-10-21 04:58:29.662960,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0,ubuntu
 2014-10-21 04:58:46.520985,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0,工程师文化
+2014-10-23 13:02:18.099835,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:33.0) Gecko/20100101 Firefox/33.0,ubuntu
+2014-10-23 13:03:42.958884,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:33.0) Gecko/20100101 Firefox/33.0,sailsjs
+2014-10-23 13:06:16.417154,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:33.0) Gecko/20100101 Firefox/33.0,android

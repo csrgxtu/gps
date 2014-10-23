@@ -8,8 +8,11 @@
 # Produced By CSRGXTU
 import config
 from Download import *
+import DownloadHTTPSProxy
 from datetime import datetime
 from random import choice
+from bs4 import BeautifulSoup
+import urlparse
 
 # loadBestIP
 # load the best IP host from ./static/top.txt
@@ -49,6 +52,70 @@ def queryGoogle(q, start):
    return None
   else:
     return dobj.getSOURCE()
+
+# proxy
+# use the proxy get the content that cant be get by normal
+# request
+#
+# @param url
+# @return content of the query
+def proxy(url):
+  d = DownloadHTTPSProxy.Download(url)
+  if (d.doRequest()):
+    return None
+  else:
+    return d.getSOURCE()
+
+# turnToAbsUrl
+# turn all urls in the html page into abs url
+#
+# @param baseUrl
+# @param html
+# @return html
+def turnToAbsUrl(baseUrl, html):
+  soup = BeautifulSoup(html)
+
+  # change href
+  for tag in soup.find_all(href=True):
+    if isAbsUrl(tag['href']):
+      pass
+    else:
+      tag['href'] = baseUrl + tag['href']
+
+  # change src
+  for tag in soup.find_all(src=True):
+    if isAbsUrl(tag['src']):
+      pass
+    else:
+      tag['src'] = baseUrl + tag['src']
+
+  return html
+
+# addProxyToUrl
+# add proxy to url
+#
+# @param html
+# @return html
+def turnToAbsUrl(html):
+  soup = BeautifulSoup(html)
+
+  # change href
+  for tag in soup.find_all(href=True):
+    tag['href'] = "/proxy?q=" + tag['href']
+
+  # change src
+  for tag in soup.find_all(src=True):
+    tag['src'] = "/proxy?q=" + tag['href']
+
+  return html
+
+# isAbsUrl
+# check if url is abs or relative
+#
+# @param url
+# @return boolean
+def isAbsUrl(url):
+  return bool(urlparse.urlparse(url).netloc)
 
 # replacer
 # replace some text in the source code of the query result, or
