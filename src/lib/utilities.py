@@ -12,7 +12,7 @@ import DownloadHTTPSProxy
 from datetime import datetime
 from random import choice
 from bs4 import BeautifulSoup
-import urlparse
+from urlparse import urljoin, urlparse
 
 # loadBestIP
 # load the best IP host from ./static/top.txt
@@ -58,21 +58,33 @@ def queryGoogle(q, start):
 # request
 #
 # @param url
+# @param httpAcceptStr
 # @return content of the query
-def proxy(url):
+def proxy(url, httpAcceptStr):
+  # urlRoot = urlparse.urlparse(url)
   d = DownloadHTTPSProxy.Download(url)
   if (d.doRequest()):
     return None
   else:
-    return d.getSOURCE()
+    if 'html' in httpAcceptStr:
+      # turn all url in source into abs url
+      html = turnToAbsUrl(url, d.getSOURCE())
+      # print "Debug turnToAbsUrl: "
+      html = addProxyToUrl(html)
+      print "Debug addProxyToUrl:"
+      html2File(html, "./debug.html")
+      return html
+    else:
+      return d.getSOURCE()
+    # return d.getSOURCE()
 
 # turnToAbsUrl
 # turn all urls in the html page into abs url
 #
-# @param baseUrl
+# @param url the url of the html
 # @param html
 # @return html
-def turnToAbsUrl(baseUrl, html):
+def turnToAbsUrl(url, html):
   soup = BeautifulSoup(html)
 
   # change href
@@ -80,23 +92,27 @@ def turnToAbsUrl(baseUrl, html):
     if isAbsUrl(tag['href']):
       pass
     else:
-      tag['href'] = baseUrl + tag['href']
+      # tag['href'] = urlRoot + tag['href']
+      tag['href'] = urljoin(url, tag['href'])
 
   # change src
   for tag in soup.find_all(src=True):
     if isAbsUrl(tag['src']):
       pass
     else:
-      tag['src'] = baseUrl + tag['src']
+      # tag['src'] = urlRoot + tag['src']
+      tag['src'] = urljoin(url, tag['src'])
 
-  return html
+  # html2File(html, "./debug.html")
+  # print soup.prettify()
+  return soup.prettify()
 
 # addProxyToUrl
 # add proxy to url
 #
 # @param html
 # @return html
-def turnToAbsUrl(html):
+def addProxyToUrl(html):
   soup = BeautifulSoup(html)
 
   # change href
@@ -105,9 +121,9 @@ def turnToAbsUrl(html):
 
   # change src
   for tag in soup.find_all(src=True):
-    tag['src'] = "/proxy?q=" + tag['href']
+    tag['src'] = "/proxy?q=" + tag['src']
 
-  return html
+  return soup.prettify()
 
 # isAbsUrl
 # check if url is abs or relative
@@ -115,7 +131,7 @@ def turnToAbsUrl(html):
 # @param url
 # @return boolean
 def isAbsUrl(url):
-  return bool(urlparse.urlparse(url).netloc)
+  return bool(urlparse(url).netloc)
 
 # replacer
 # replace some text in the source code of the query result, or
@@ -164,3 +180,14 @@ def log(clientIP, userAgent, keyWord):
     myFile.write(csvStr)
 
 #API_HOST = loadBestIP(config.TOP_IP_FILE)
+
+# html2File
+# save html source 2 file
+#
+# @param html
+# @param outFile
+# @return None
+def html2File(html, outFile):
+  html = unicode(html).encode('utf8')
+  with open(outFile, "w") as myFile:
+    myFile.write(html)

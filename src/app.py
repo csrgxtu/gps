@@ -31,6 +31,8 @@ def index():
 # accept the keyword and search and return the result
 @app.route("/search")
 def search():
+  # print "Debug Headers /search"
+  # print request.headers['Accept']
   q = quote(unicode(request.args.get('q', '')).encode('utf8'))
   if q == "":
     return redirect("/")
@@ -56,6 +58,8 @@ def search():
 # indexed url
 @app.route("/url")
 def url():
+  # print "Debug Headers /url"
+  # print request.headers['Accept']
   q = quote(unicode(request.args.get('q', '')).encode('utf8'))
   return redirect(unquote(q), 302)
 
@@ -65,7 +69,10 @@ def url():
 @app.route("/proxy")
 def proxy():
   q = unicode(request.args.get('q', '')).encode('utf8')
-  content = utilities.proxy(q)
+  print "Debug /proxy " + q
+  # urlRoot = request.url_root
+  # print "Debug urlRoot: " + urlRoot
+  content = utilities.proxy(q, request.headers['Accept'])
   if content == None:
     return render_template('error.html')
   else:
