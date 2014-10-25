@@ -68,6 +68,7 @@ def search():
   else:
     g = GoogleSearchResultParser(html)
     jsonData = g.getJson()
+    # print jsonData
     jsonData['q'] = request.args.get('q', '')
     jsonData['start'] = start
     return render_template('result.html', jsonData=jsonData)
@@ -81,7 +82,12 @@ def url():
   # print "Debug Headers /url"
   # print request.headers['Accept']
   q = quote(unicode(request.args.get('q', '')).encode('utf8'))
-  return redirect(unquote(q), 302)
+  # print "Debug: ", unquote(q)
+  if ".android.com" in unquote(q):
+    return redirect('/p/' + unquote(q).replace('http://', ''), 302)
+  else:
+    return redirect(unquote(q), 302)
+  # return redirect(unquote(q), 302)
 
 """
 # proxy

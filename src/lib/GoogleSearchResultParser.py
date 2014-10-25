@@ -60,6 +60,7 @@ class GoogleSearchResultParser(object):
     return item.find("h3", class_="r").find("a").get_text()
 
   def getUnescapedUrl(self, item):
+    # print "Debug getUnescapedUrl: " + item.find("h3", class_="r").find("a")["href"]
     return item.find("h3", class_="r").find("a")["href"]
 
   def getEscapedUrl(self, item):
@@ -92,6 +93,7 @@ class GoogleSearchResultParser(object):
       try:
         title = self.getTitle(item)
         unescapedUrl = self.getUnescapedUrl(item)
+        # print "Debug unescapedUrl: " + unescapedUrl
         escapedUrl = self.getEscapedUrl(item)
         content = self.getContent(item)
         tmpDict = {'title': title, 'unescapedUrl': unescapedUrl, 'escapedUrl': escapedUrl, 'content': content}
@@ -101,4 +103,6 @@ class GoogleSearchResultParser(object):
     self.jsonData['results'] = tmpLst
     self.jsonData['resultStats'] = self.getResultStats()
     self.jsonData['relatedKeyWords'] = self.getRelatedKeyWords()
+    # print "Debug: "
+    # print self.jsonData
     return self.jsonData

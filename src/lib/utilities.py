@@ -45,7 +45,7 @@ def loadBestNIP(filePath, n):
 # @return source code of the query or string
 def queryGoogle(q, start):
   API_HOST = choice(loadBestNIP(config.TOP_IP_FILE, 5))
-  print "Debug: " + API_HOST
+  # print "Debug: " + API_HOST
   GOOGLE_API = 'http://' + API_HOST + '/search?q='
   dobj = Download(GOOGLE_API + q + '&start=' + start)
   if (dobj.doRequest()):
