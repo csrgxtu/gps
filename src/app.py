@@ -17,6 +17,8 @@ import config
 import utilities
 from GoogleSearchResultParser import GoogleSearchResultParser
 
+import urllib2
+
 app = Flask(__name__)
 app.debug = True
 
@@ -77,6 +79,14 @@ def proxy():
     return render_template('error.html')
   else:
     return content
+
+@app.route("/android")
+def android():
+  proxy_support = urllib2.ProxyHandler({"http":"http://127.0.0.1:8087"})
+  opener = urllib2.build_opener(proxy_support)
+  urllib2.install_opener(opener)
+  html = urllib2.urlopen("https://www.android.com").read()
+  return html
 
 @app.errorhandler(404)
 def notFound(error):
