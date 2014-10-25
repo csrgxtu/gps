@@ -89,6 +89,13 @@ def url():
     return redirect(unquote(q), 302)
   # return redirect(unquote(q), 302)
 
+# /jsf
+# just for fun gags
+# play videos
+@app.route("/jsf")
+def jsf():
+  return render_template('justforfun.html')
+
 """
 # proxy
 # when encoutered this kind of url, use goagent get the request
