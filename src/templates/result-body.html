@@ -1,0 +1,148 @@
+    <!-- result stats -->
+    <!-- result box -->
+    <div class="Result-Box">
+      {% if jsonData.start|int > 10 %}
+        <span class="Result-Item-Stats">Page {{ jsonData.start|int / 10 | int}} about {{ jsonData.resultStats }} results</span>
+      {% else %}
+        <span class="Result-Item-Stats">About  {{ jsonData.resultStats}}  results</span>
+      {% endif %}
+      <ul class="Ul-List">
+        <li>
+          <div>
+            {% for item in jsonData.results %}
+              <ul class="Result-Item">
+                <li class="Result-Item-Title"><a href="{{ item.unescapedUrl }}" target="_blank">{{ item.title }}</a></li>
+                <li class="Result-Item-Short-Link">{{ item.escapedUrl }}</li>
+                <li class="Result-Item-Abstract">{{ item.content }}</li>
+              </ul>
+            {% endfor %}
+
+            <!--
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.ubuntu.com/">Ubuntu:The world's most popular free OS</a></li>
+              <li class="Result-Item-Short-Link">www.ubuntu.com/</li>
+              <li class="Result-Item-Abstract">Fast, secure and stylishly simple, the Ubuntu operating system is used by 20 million people everyday. You can used it freely without any pays.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://ubuntugnome.org">Ubuntu Gnome</a></li>
+              <li class="Result-Item-Short-Link">ubuntugnome.org/</li>
+              <li class="Result-Item-Abstract">Official flavour of Ubuntu, featuring the GNOME desktop evironment by default. It is a Community Project and all the members of this project are working on voluntary basis. We do what we do.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.debian.org/">Debian -- The Universal Operating System</a></li>
+              <li class="Result-Item-Short-Link">www.debian.org/</li>
+              <li class="Result-Item-Abstract">Debian provides more than a pure OS: it comes with over 37500 packages, precompiled software bundled up in a nice format for easy installation on your ...</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://fedoraproject.org/">Fedora Project Homepage</a></li>
+              <li class="Result-Item-Short-Link">fedoraproject.org/</li>
+              <li class="Result-Item-Abstract">Free your desktop with Fedora. Fedora is a fast, stable, and powerful operating system for everyday use built by a worldwide community of friends. It's completely free to use, study, and share.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.videolan.org/vlc/index.html">VideoLAN - Official page for VLC media player, the Open ...</a></li>
+              <li class="Result-Item-Short-Link">www.videolan.org/vlc/index.html</li>
+              <li class="Result-Item-Abstract">VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files as well as DVD, Audio CD, VCD, and various streaming protocols.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://www.gnome.org/">GNOME</a></li>
+              <li class="Result-Item-Short-Link">www.gnome.org/</li>
+              <li class="Result-Item-Abstract">GNOME 3 is an easy and elegant way to use your computer. It is designed to put you in control and bring freedom to everybody. GNOME 3 is developed by the GNOME community, a diverse, international group of contributors that is supported by an independent, non-profit foundation.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="https://unity3d.com/">Unity - Game Engine</a></li>
+              <li class="Result-Item-Short-Link">https://unity3d.com/</li>
+              <li class="Result-Item-Abstract">Develop once, publish everywhere! Unity is the ultimate tool for video game development, architectural visualizations, and interactive media installations ...</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="https://unity.ubuntu.com/">Unity | Unity</a></li>
+              <li class="Result-Item-Short-Link">https://unity.ubuntu.com/</li>
+              <li class="Result-Item-Abstract">Founded in 2010, the Unity project started by Mark Shuttleworth and Canonical has gone on to deliver a consistent user experience for desktop and netbook users alike. Putting great design at the heart of the project, Unity and its technologies such as Application indicators, System indicators, and Notify OSD, have strived to solve common problems in the Free Software desktop while optimizing the experience for touch, consistency and collaboration.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="http://ellislab.com/codeigniter">CodeIgniter / EllisLab</a></li>
+              <li class="Result-Item-Short-Link">http://ellislab.com/codeigniter/</li>
+              <li class="Result-Item-Abstract">CodeIgniter is a powerful PHP framework with a very small footprint, built for PHP coders who need a simple and elegant toolkit to create full-featured web applications. If you're a developer who lives in the real world of shared hosting accounts and clients with deadlines, and if you're tired of ponderously large and thoroughly undocumented frameworks, then CodeIgniter might be a good fit.</li>
+            </ul>
+            
+            <ul class="Result-Item">
+              <li class="Result-Item-Title"><a href="https://github.com/csrgxtu/">csrgxtu (Archer Reilly) Â· GitHub</a></li>
+              <li class="Result-Item-Short-Link">https://github.com/csrgxtu/</li>
+              <li class="Result-Item-Abstract">csrgxtu has 3 repositories written in Shell, CSS, and Java. Follow their code on GitHub.</li>
+            </ul>
+          -->
+
+            {% if jsonData.relatedKeyWords %}
+              <ul class="Result-Item">
+                <br/>
+                <span> Search Related: </span>
+                <table style="width:100%">
+                  {% for item in jsonData.relatedKeyWords %}
+                    {% if loop.index is even %}
+                      <td><a href="/search?q={{ jsonData.relatedKeyWords[loop.index]}}">{{ jsonData.relatedKeyWords[loop.index]}}</a></td>
+                      </tr>
+                    {% else %}
+                      <tr>
+                      <td><a href="/search?q={{ jsonData.relatedKeyWords[loop.index]}}">{{ jsonData.relatedKeyWords[loop.index]}}</a></td>
+                    {% endif %}
+                  {% endfor %}
+                </table>
+              </ul>
+            {% endif %}
+            <!--
+            <ul class="Result-Item">
+              <br/>
+              <span> Search related </span>
+              <table style="width:100%">
+                <tr>
+                  <td><a href="#">Linux operating system</a></td>
+                  <td><a href="#">Ubuntu Gnome 14.10</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">Ubuntu tutorial</a></td>
+                    <td><a href="#">Debian an distro ubuntu</a></td>
+                </tr>
+              </table>
+            </ul>
+          -->
+
+            {% set pages = 100/10|int %}
+            <ul class="Result-Item">
+              <ul class="pagination">
+              {% for pageIndex in range(10) %}
+                {% if pageIndex == jsonData.start|int/10 %}
+                  <li class="active"><a href="/search?q={{jsonData.q}}&start={{pageIndex * 10}}">{{pageIndex + 1}} <span class="sr-only">(current)</span></a></li>
+                {% else %}
+                  <li class="disable"><a href="/search?q={{jsonData.q}}&start={{pageIndex * 10}}">{{pageIndex + 1}}</a></li>
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </ul>
+            <!--
+            <ul class="Result-Item">
+              <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="/search?q={{jsonData.q}}">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">7</a></li>
+                <li><a href="#">8</a></li>
+                <li><a href="#">9</a></li>
+                <li><a href="#">10</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+            </ul>
+          -->
+            </div>
+          </div>
+          

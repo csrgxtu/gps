@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./static/favicon.ico">
+
+    <!--<title>Google Search</title>-->
+
+    {% if jsonData.q %}
+      <title>{{ jsonData.q }}</title>
+    {% else %}
+      <title>Google Search Default Title</title>
+    {% endif %}
+        
+    <!-- Bootstrap core CSS -->
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./static/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./static/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pure-min.css">
+    <style>
+      .Result-Box {
+        margin-left: 9%;
+        /*margin-left: 50px;*/
+        margin-top: 10px;
+        width: 51.8%;
+      }
+      
+      .Ul-List {
+        list-style-type: none;
+        margin-top: 10px;
+        margin-left: -40px;
+      }
+      
+      .Pagination {
+        margin-top: 50px;
+        margin-left: 2%;
+      }
+      
+      .Result-Item {
+        list-style-type: none;
+        margin-top: 10px;
+        /*margin-left: -40px;*/
+        margin-left: -6%;
+        /*margin-right: 20px;*/
+      }
+      
+      .Result-Item-Title {
+        font-size: 19px;
+        font-style: bold;
+        max-width: 580px;
+        min-width: 420px;
+        max-height: 23px;
+        overflow: hidden;
+      }
+
+      .Result-Item-Short-Link {
+        font-size: 15px;
+        /*color: green;*/
+        color: #006621;
+        margin-bottom: 5px;
+      }
+
+      .Result-Item-Abstract {
+        /*color: #606060;*/
+        color: #444;
+        max-width: 580px;
+        min-width: 420px;
+        max-height: 59px;
+        overflow: hidden;
+      }
+
+      .Result-Item-Stats {
+        /*margin-left: 9.1%;*/
+        width: 51.8%;
+        color: #606060;
+        font-size: 13px;
+      }
+
+      a {
+        outline: 0;
+        text-decoration: none;
+        /*color: blue;*/
+        color: #1a0dab;
+        cursor: pointer;
+      }
+      
+      a:hover {
+        text-decoration: none;
+      }
+      
+      a:visited {
+        /*color: #800080;*/
+        color: #61C;
+      }
+      
+      a:active {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Top Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">GPS</a>
+        </div>
+        
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/search">Search</a></li>
+            <li><a href="http://csrgxtu.blog.com">Blog</a></li>
+            <li><a href="http://www.ubuntu.com/">Linux</a></li>
+            <li><a href="#news">News</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#gmail">Gmail</a></li>
+                <li><a href="#translate">Translate</a></li>
+                <li><a href="#drive">Drive</a></li>
+                <li><a href="#calander">Calander</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#login">Login</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
