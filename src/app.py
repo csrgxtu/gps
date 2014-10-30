@@ -45,7 +45,7 @@ app.debug = True
 @app.route("/")
 @app.route("/index")
 def index():
-  return render_template('index.html')
+  return render_template('web-search-index.html', jsonData={})
 
 # /search
 # accept the keyword and search and return the result
@@ -71,7 +71,7 @@ def search():
     # print jsonData
     jsonData['q'] = request.args.get('q', '')
     jsonData['start'] = start
-    return render_template('result.html', jsonData=jsonData)
+    return render_template('web-search-result.html', jsonData=jsonData)
 
 # /url
 # used process the google indexed url, actually, it wont need
