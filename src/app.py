@@ -96,22 +96,9 @@ def url():
 def jsf():
   return render_template('justforfun.html')
 
-"""
-# proxy
-# when encoutered this kind of url, use goagent get the request
-# content
-@app.route("/proxy")
-def proxy():
-  q = unicode(request.args.get('q', '')).encode('utf8')
-  print "Debug /proxy " + q
-  # urlRoot = request.url_root
-  # print "Debug urlRoot: " + urlRoot
-  content = utilities.proxy(q, request.headers['Accept'])
-  if content == None:
-    return render_template('error.html')
-  else:
-    return content
-"""
+@app.route('/about')
+def about():
+  return render_template('about.html', jsonData={})
 
 @app.errorhandler(404)
 def notFound(error):
