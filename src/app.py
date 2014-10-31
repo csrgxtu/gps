@@ -7,7 +7,11 @@
 #
 # Produced By CSRGXTU
 import sys
-sys.path.insert(0, '/home/archer/Documents/gps/src/lib')
+# from os import getcwd
+from os.path import abspath
+
+sys.path.insert(0, abspath('.') + '/lib')
+# sys.path.insert(0, '/home/archer/Documents/gps/src/lib')
 
 from flask import Flask, render_template, request, redirect, Blueprint, Response, url_for
 from urllib import urlencode, quote, unquote
