@@ -1,4 +1,4 @@
 import sys
-from os.path import abspath
-sys.path.insert(0, abspath('.'))
+from os.path import dirname
+sys.path.insert(0, dirname(__file__))
 from app import app as application

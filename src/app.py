@@ -8,9 +8,9 @@
 # Produced By CSRGXTU
 import sys
 # from os import getcwd
-from os.path import abspath
+from os.path import dirname
 
-sys.path.insert(0, abspath('.') + '/lib')
+sys.path.insert(0, dirname(__file__) + '/lib')
 # sys.path.insert(0, '/home/archer/Documents/gps/src/lib')
 
 from flask import Flask, render_template, request, redirect, Blueprint, Response, url_for

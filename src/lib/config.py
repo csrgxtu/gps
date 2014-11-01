@@ -8,10 +8,11 @@
 #
 # Produced By CSRGXTU
 # from os import getcwd
-from os.path import abspath
+from os.path import dirname
 
 # ROOT = getcwd() + '/'
-ROOT = abspath('..') + '/'
+ROOT = dirname(__file__) + '/../'
+
 # contains the top n IP one ip per line from fast to slow
 # TOP_IP_FILE = "/home/archer/Documents/gps/src/static/top.txt"
 TOP_IP_FILE = ROOT + 'static/top.txt'
