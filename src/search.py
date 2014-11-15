@@ -7,12 +7,9 @@
 #
 # Produced By CSRGXTU
 import sys
-# from os import getcwd
 from os.path import dirname
 
 sys.path.insert(0, dirname(__file__) + '/lib')
-print "Debug: " + dirname(__file__)
-# sys.path.insert(0, '/home/archer/Documents/gps/src/lib')
 
 from flask import Flask, render_template, request, redirect, Blueprint, Response, url_for
 from urllib import urlencode, quote, unquote
@@ -25,22 +22,6 @@ from json import loads, dumps
 import config
 import utilities
 from GoogleSearchResultParser import GoogleSearchResultParser
-# from flask import Flask, render_template
-# from flask import request
-# from flask import redirect
-# from urllib import quote, unquote
-
-# import urllib2
-
-# import httplib
-# import re
-# import urllib
-# import urlparse
-# import json
-
-# from flask import Blueprint, Response, url_for
-# from werkzeug.datastructures import Headers
-# from werkzeug.exceptions import NotFound
 
 app = Flask(__name__)
 app.debug = True
@@ -261,6 +242,7 @@ def proxy_request(host, file=""):
 
 app.register_blueprint(proxy)
 """ proxy functionality end """
+
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', port=80)
