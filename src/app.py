@@ -11,6 +11,7 @@ import sys
 from os.path import dirname
 
 sys.path.insert(0, dirname(__file__) + '/lib')
+print "Debug: " + dirname(__file__)
 # sys.path.insert(0, '/home/archer/Documents/gps/src/lib')
 
 from flask import Flask, render_template, request, redirect, Blueprint, Response, url_for
@@ -111,6 +112,15 @@ def notFound(error):
 @app.errorhandler(500)
 def notImplemented(error):
     return render_template('error.html')
+
+@app.route('/proxy')
+def proxy():
+  q = unicode(request.args.get('q', '')).encode('utf8')
+  content = utilities.proxy(q, request.headers['Accept'])
+  if content == None:
+    return None
+  else:
+    return content
 
 """ here define proxy functionality """
 proxy = Blueprint('proxy', __name__)
@@ -230,6 +240,7 @@ def proxy_request(host, file=""):
         # JSON format conentens will be modified here.
         jc = json.loads(contents)
         if jc.has_key("nodes"):
+
             del jc["nodes"]
         contents = json.dumps(jc)
 

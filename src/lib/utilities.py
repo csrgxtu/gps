@@ -44,7 +44,7 @@ def loadBestNIP(filePath, n):
 # @param start
 # @return source code of the query or string
 def queryGoogle(q, start):
-  API_HOST = choice(loadBestNIP(config.TOP_IP_FILE, 5))
+  API_HOST = choice(loadBestNIP(config.TOP_IP_FILE, 20))
   # print "Debug: " + API_HOST
   GOOGLE_API = 'http://' + API_HOST + '/search?q='
   dobj = Download(GOOGLE_API + q + '&start=' + start)
@@ -71,8 +71,8 @@ def proxy(url, httpAcceptStr):
       html = turnToAbsUrl(url, d.getSOURCE())
       # print "Debug turnToAbsUrl: "
       html = addProxyToUrl(html)
-      print "Debug addProxyToUrl:"
-      html2File(html, "./debug.html")
+      #print "Debug addProxyToUrl:"
+      #html2File(html, "./debug.html")
       return html
     else:
       return d.getSOURCE()
