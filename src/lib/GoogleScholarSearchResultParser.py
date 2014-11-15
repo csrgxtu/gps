@@ -74,7 +74,7 @@ class GoogleScholarSearchResultParser(object):
     # pass
 
   def getTitle(self, item):
-    return item.find('h3', class_='gs_rt').get_text()
+    return item.find('h3', class_='gs_rt').find('a').get_text()
     # pass
 
   def getUnescapedUrl(self, item):
@@ -96,17 +96,19 @@ class GoogleScholarSearchResultParser(object):
 
   def getAuthors(self, item):
     res = []
-    tmpres = {}
     tmpnames = []
+    # tmpres = {}
     names = item.find('div', class_='gs_a').get_text().split('-')[0].split(', ')
     for i in item.find('div', class_='gs_a').find_all('a'):
+      tmpres = {}
       if i.get_text() in names:
-        tmpres['name'] = i.get_text
+        tmpres['name'] = i.get_text()
         tmpres['citationLink'] = i['href']
         res.append(tmpres)
         tmpnames.append(i.get_text())
 
     for name in names:
+      tmpres = {}
       if name in tmpnames:
         continue
       else:

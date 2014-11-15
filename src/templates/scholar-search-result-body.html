@@ -13,9 +13,33 @@
             {% for item in jsonData.results %}
               
               <ul class="Result-Item">
-                <li class="Result-Item-Title"><a href="{{ item.unescapedUrl }}" target="_blank">{{ item.title }}</a></li>
-                <li class="Result-Item-Short-Link">{{ item.escapedUrl }}</li>
+                <li class="Result-Item-Title"><a href="{{ item.escapedUrl }}" target="_blank">{{ item.title }}</a></li>
+                <li class="Result-Item-Scholar-Author">
+                  {% for author in item.authors %}
+                    {% if author.citationLink == None %}
+                      {{ author.name }}
+                    {% else %}
+                      <a href="{{ author.citationLink }}" target="_blank">{{ author.name }}</a>
+                    {% endif %}
+                  {% endfor %}
+                  -
+                  {{ item.meeting }}
+                  -
+                  {{ item.year }}
+                  -
+                  {{ item.From }}
+                </li>
+                <!-- <li class="Result-Item-Short-Link">{{ item.escapedUrl }}</li> -->
                 <li class="Result-Item-Abstract">{{ item.content }}</li>
+                <li class="Result-Item-Scholar-Cite">
+                  <a href="{{ item.cited.citeLink }}" target="_blank">Cited By {{ item.cited.quantity}}</a>
+                  &nbsp&nbsp
+                  <a href="{{ item.related }}" target="_blank">Related articles</a>
+                  &nbsp&nbsp
+                  {% if item.mime %}
+                    <a href="{{ item.unescapedUrl }}" target="_blank">[{{ item.mime }}]</a>
+                  {% endif %}
+                </li>
               </ul>
               
               <!-- {{ item.title }} -->
