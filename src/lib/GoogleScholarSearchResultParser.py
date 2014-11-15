@@ -10,7 +10,7 @@
 # parser here.
 #
 # {
-#   'resultStats': 'About 256,000 results',
+#   'resultStats': '256000',
 #   'results': [
 #     {
 #       'mime': 'pdf',
@@ -143,12 +143,13 @@ class GoogleScholarSearchResultParser(object):
     return item.find('div', class_='gs_ri').find('div', class_='gs_fl').find_all('a')[2]['href']
     # pass
 
-  def getJsonData(self):
+  def getJson(self):
     tmpLst = []
-    tmpDict = {}
     self.jsonData['resultStats'] = self.getResultStats()
     # self.jsonData['results'] = []
     for item in self.resultSets:
+      # print "Title: " + self.getTitle(item)
+      tmpDict = {}
       tmpDict['mime'] = self.getMime(item)
       tmpDict['title'] = self.getTitle(item)
       tmpDict['unescapedUrl'] = self.getUnescapedUrl(item)

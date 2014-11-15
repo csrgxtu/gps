@@ -24,22 +24,19 @@ from re import compile
 from json import loads, dumps
 import config
 import utilities
-from GoogleSearchResultParser import GoogleSearchResultParser
+from GoogleScholarSearchResultParser import GoogleScholarSearchResultParser
 
 
 app = Flask(__name__)
 
-""" scholar.csrgxtu.com """
 @app.route('/')
-def scholar_index():
+def index():
   return render_template('scholar-search-index.html', jsonData={})
 
-# /search
+# /scholar
 # accept the keyword and search and return the result
-@app.route("/search")
-def search():
-  # print "Debug Headers /search"
-  # print request.headers['Accept']
+@app.route("/scholar")
+def scholar():
   q = quote(unicode(request.args.get('q', '')).encode('utf8'))
   if q == "":
     return redirect("/")
@@ -49,16 +46,17 @@ def search():
   else:
     start = str(0)
   utilities.log(str(request.remote_addr), str(request.headers.get('User-Agent')), request.args.get('q', ''))
-  html = utilities.queryGoogle(q, start)
+  html = utilities.scholarQuery(q, start)
   if html == None:
     return render_template('error.html')
   else:
-    g = GoogleSearchResultParser(html)
+    g = GoogleScholarSearchResultParser(html)
     jsonData = g.getJson()
-    # print jsonData
     jsonData['q'] = request.args.get('q', '')
     jsonData['start'] = start
-    return render_template('web-search-result.html', jsonData=jsonData)
+    # return html
+    # return render_template('about.html', jsonData={})
+    return render_template('scholar-search-result.html', jsonData=jsonData)
 
 # /url
 # used process the google indexed url, actually, it wont need

@@ -1,0 +1,38 @@
+    <!-- result stats -->
+    <!-- result box -->
+    <div class="Result-Box">
+      {% if jsonData.start|int > 10 %}
+        <span class="Result-Item-Stats">Page {{ jsonData.start|int / 10 | int}} about {{ jsonData.resultStats }} results</span>
+      {% else %}
+        <span class="Result-Item-Stats">About  {{ jsonData.resultStats}}  results</span>
+      {% endif %}
+      <ul class="Ul-List">
+        <li>
+          <div>
+            <!-- {{ jsonData.results }} -->
+            {% for item in jsonData.results %}
+              
+              <ul class="Result-Item">
+                <li class="Result-Item-Title"><a href="{{ item.unescapedUrl }}" target="_blank">{{ item.title }}</a></li>
+                <li class="Result-Item-Short-Link">{{ item.escapedUrl }}</li>
+                <li class="Result-Item-Abstract">{{ item.content }}</li>
+              </ul>
+              
+              <!-- {{ item.title }} -->
+            {% endfor %}
+
+
+            {% set pages = 100/10|int %}
+            <ul class="Result-Item">
+              <ul class="pagination">
+              {% for pageIndex in range(10) %}
+                {% if pageIndex == jsonData.start|int/10 %}
+                  <li class="active"><a href="/scholar?q={{jsonData.q}}&start={{pageIndex * 10}}">{{pageIndex + 1}} <span class="sr-only">(current)</span></a></li>
+                {% else %}
+                  <li class="disable"><a href="/scholar?q={{jsonData.q}}&start={{pageIndex * 10}}">{{pageIndex + 1}}</a></li>
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </ul>
+            </div>
+          </div>

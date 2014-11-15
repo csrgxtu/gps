@@ -53,6 +53,36 @@ def queryGoogle(q, start):
   else:
     return dobj.getSOURCE()
 
+# searchQuery
+# use the IP query the Google Search
+#
+# @param q
+# @param start
+# @return source code of the query or None
+def searchQuery(q, start):
+  API_HOST = choice(loadBestNIP(config.TOP_IP_FILE, 20))
+  SEARCH_API = 'https://' + API_HOST + '/search?q='
+  dobj = Download(SEARCH_API + q + '&start=' + start)
+  if (dobj.doRequest()):
+    return None
+  else:
+    return dobj.getSOURCE()
+
+# scholarQuery
+# use the IP query the Google scholar
+#
+# @param q
+# @param start
+# @return source code of the query string
+def scholarQuery(q, start):
+  API_HOST = choice(loadBestNIP(config.TOP_IP_FILE, 20))
+  SCHOLAR_API = 'http://' + API_HOST + '/scholar?q='
+  dobj = Download(SCHOLAR_API + q + '&start=' + start)
+  if (dobj.doRequest()):
+    return None
+  else:
+    return dobj.getSOURCE()
+
 # proxy
 # use the proxy get the content that cant be get by normal
 # request
