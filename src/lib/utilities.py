@@ -77,6 +77,7 @@ def searchQuery(q, start):
 def scholarQuery(q, start):
   API_HOST = choice(loadBestNIP(config.TOP_IP_FILE, 20))
   SCHOLAR_API = 'http://' + API_HOST + '/scholar?q='
+  # dobj = Download(SCHOLAR_API + q + '&start=' + start)
   dobj = Download(SCHOLAR_API + q + '&start=' + start)
   if (dobj.doRequest()):
     return None
