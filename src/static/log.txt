@@ -320,7 +320,12 @@
 2014-11-15 14:05:22.571484,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:33.0) Gecko/20100101 Firefox/33.0,android security
 2014-11-15 14:05:33.529846,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:33.0) Gecko/20100101 Firefox/33.0,pagerank python
 2014-11-15 14:05:42.119646,127.0.0.1,Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:33.0) Gecko/20100101 Firefox/33.0,pagerank
+<<<<<<< HEAD
 2014-11-18 07:02:29.908844,127.0.0.1,Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/38.0.2125.111 Chrome/38.0.2125.111 Safari/537.36,pagerank
 2014-11-18 12:23:57.973274,127.0.0.1,Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/38.0.2125.111 Chrome/38.0.2125.111 Safari/537.36,android security
 2014-11-18 12:44:04.043930,127.0.0.1,Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/38.0.2125.111 Chrome/38.0.2125.111 Safari/537.36,ubuntu
 2014-11-18 12:48:15.917832,127.0.0.1,Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/38.0.2125.111 Chrome/38.0.2125.111 Safari/537.36,csrgxtu
+=======
+2014-11-22 05:22:07.338890,127.0.0.1,Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36,ubuntu
+2014-11-22 05:22:57.924234,127.0.0.1,Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36,csrgxtu
+>>>>>>> bcf5ffc948ff110dc375232594d3f51bc2dd8033
